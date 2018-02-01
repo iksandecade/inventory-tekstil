@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.dashboardMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.rawMaterialMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.benangMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.semicalMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tubeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.finishedGoodsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.kainMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.dashboardMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.settingMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.userMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.jenisKainMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.jenisSemicalMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.rakMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,13 @@
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // dashboardMenu
+            // 
+            this.dashboardMenu.Name = "dashboardMenu";
+            this.dashboardMenu.Size = new System.Drawing.Size(76, 20);
+            this.dashboardMenu.Text = "Dashboard";
+            this.dashboardMenu.Click += new System.EventHandler(this.dashboardMenu_Click);
+            // 
             // rawMaterialMenu
             // 
             this.rawMaterialMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -72,21 +79,21 @@
             // benangMenu
             // 
             this.benangMenu.Name = "benangMenu";
-            this.benangMenu.Size = new System.Drawing.Size(152, 22);
+            this.benangMenu.Size = new System.Drawing.Size(115, 22);
             this.benangMenu.Text = "Benang";
             this.benangMenu.Click += new System.EventHandler(this.benangMenu_Click);
             // 
             // semicalMenu
             // 
             this.semicalMenu.Name = "semicalMenu";
-            this.semicalMenu.Size = new System.Drawing.Size(152, 22);
+            this.semicalMenu.Size = new System.Drawing.Size(115, 22);
             this.semicalMenu.Text = "Semical";
             this.semicalMenu.Click += new System.EventHandler(this.semicalMenu_Click);
             // 
             // tubeMenu
             // 
             this.tubeMenu.Name = "tubeMenu";
-            this.tubeMenu.Size = new System.Drawing.Size(152, 22);
+            this.tubeMenu.Size = new System.Drawing.Size(115, 22);
             this.tubeMenu.Text = "Tube";
             // 
             // finishedGoodsMenu
@@ -100,15 +107,8 @@
             // kainMenu
             // 
             this.kainMenu.Name = "kainMenu";
-            this.kainMenu.Size = new System.Drawing.Size(152, 22);
+            this.kainMenu.Size = new System.Drawing.Size(97, 22);
             this.kainMenu.Text = "Kain";
-            // 
-            // dashboardMenu
-            // 
-            this.dashboardMenu.Name = "dashboardMenu";
-            this.dashboardMenu.Size = new System.Drawing.Size(76, 20);
-            this.dashboardMenu.Text = "Dashboard";
-            this.dashboardMenu.Click += new System.EventHandler(this.dashboardMenu_Click);
             // 
             // settingMenu
             // 
@@ -121,12 +121,6 @@
             this.settingMenu.Size = new System.Drawing.Size(56, 20);
             this.settingMenu.Text = "Setting";
             // 
-            // logoutMenu
-            // 
-            this.logoutMenu.Name = "logoutMenu";
-            this.logoutMenu.Size = new System.Drawing.Size(57, 20);
-            this.logoutMenu.Text = "Logout";
-            // 
             // userMenu
             // 
             this.userMenu.Name = "userMenu";
@@ -138,6 +132,7 @@
             this.jenisKainMenu.Name = "jenisKainMenu";
             this.jenisKainMenu.Size = new System.Drawing.Size(152, 22);
             this.jenisKainMenu.Text = "Jenis Kain";
+            this.jenisKainMenu.Click += new System.EventHandler(this.jenisKainMenu_Click);
             // 
             // jenisSemicalMenu
             // 
@@ -150,6 +145,12 @@
             this.rakMenu.Name = "rakMenu";
             this.rakMenu.Size = new System.Drawing.Size(152, 22);
             this.rakMenu.Text = "Rak";
+            // 
+            // logoutMenu
+            // 
+            this.logoutMenu.Name = "logoutMenu";
+            this.logoutMenu.Size = new System.Drawing.Size(57, 20);
+            this.logoutMenu.Text = "Logout";
             // 
             // FormDashboard
             // 

@@ -48,5 +48,12 @@ namespace InventoryTekstil
         {
 
         }
+
+        private void jenisKainMenu_Click(object sender, EventArgs e)
+        {
+            Dashboard.Takeout takeout = new Dashboard.Takeout();
+            takeout.MdiParent= this;
+            takeout.Show();
+        }
     }
 }
