@@ -24,6 +24,7 @@ namespace InventoryTekstil.Dashboard
         {
             button5.Enabled = false;
             dataGridView2.Enabled = false;
+            button1.Enabled = false;
             conn_user.Open();
             var sql = new MySqlCommand("SELECT * FROM tbl_jenis_kain", conn_user);
             MySqlDataReader read = sql.ExecuteReader();
@@ -40,7 +41,7 @@ namespace InventoryTekstil.Dashboard
         private void button3_Click(object sender, EventArgs e)
         {
             conn_user.Open();
-           
+
             stockData = Int32.Parse(textBox1.Text.ToString());
             string query = "SELECT * FROM tbl_kain where kd_jenis=(select kd_jenis from tbl_jenis_kain where nama='" + comboBox1.Text + "') order by stock asc";
             var sql = new MySqlCommand(query, conn_user);
@@ -48,8 +49,8 @@ namespace InventoryTekstil.Dashboard
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
             while (read.Read())
-            {                
-                    dataGridView1.Rows.Add(read.GetString("kd_kain"), read.GetString("kd_jenis"), read.GetString("lot"), read.GetString("panjang"), read.GetString("gramasi"), read.GetString("stock"));                
+            {
+                dataGridView1.Rows.Add(read.GetString("kd_kain"), read.GetString("kd_jenis"), read.GetString("lot"), read.GetString("panjang"), read.GetString("gramasi"), read.GetString("stock"));
             }
 
             read.Close();
@@ -92,6 +93,7 @@ namespace InventoryTekstil.Dashboard
                         stockData = 0;
                         button4.Enabled = false;
                         dataGridView1.Enabled = false;
+                        button1.Enabled = true;
                     }
                     else
                     {
@@ -100,7 +102,7 @@ namespace InventoryTekstil.Dashboard
                     }
                     dataGridView2.Rows.Add(kodeKain, kodeJenis, lot, panjang, gramasi, stock);
                     button5.Enabled = true;
-                    dataGridView2.Enabled = true;
+                    dataGridView2.Enabled = true;                    
                 }
             }
         }
@@ -127,7 +129,7 @@ namespace InventoryTekstil.Dashboard
 
                     Boolean isAvaialbe = false;
                     Int32 avaiableAt = 0;
-                    for (int i = 0; i < dataGridView1.Rows.Count-1; i++)
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
                     {
                         if (dataGridView1.Rows[i].Cells[0].Value.ToString() == kodeKain)
                         {
@@ -151,15 +153,77 @@ namespace InventoryTekstil.Dashboard
                         stockData = stockData + Int32.Parse(stock);
                     }
 
-                    if (dataGridView2.Rows.Count == 1)
+                    if (dataGridView2.Rows.Count == 0)
                     {
                         button5.Enabled = false;
                         dataGridView2.Enabled = false;
                     }
                     button4.Enabled = true;
-                    dataGridView1.Enabled = true;                    
+                    dataGridView1.Enabled = true;
+                    button1.Enabled = false;
                 }
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            conn_user.Open();
+
+            for (int rows = 0; rows < dataGridView2.Rows.Count; rows++)
+            {
+
+                Int32 row = dataGridView2.SelectedCells[0].RowIndex;
+                string kodeKain = dataGridView2.Rows[rows].Cells[0].Value.ToString();
+                string stock = dataGridView2.Rows[rows].Cells[5].Value.ToString();
+                DateTime today = DateTime.Today;
+                string query = "insert into tbl_out (kd_item, jenis, tgl_keluar, jumlah) values ('" + kodeKain + "','" + comboBox1.Text + "','"+ today.ToString("yyyy-MM-dd hh:mm:ss") + "','" + stock + "')";
+                MySqlCommand cmd = new MySqlCommand(query, conn_user);                
+                cmd.ExecuteNonQuery();
+                string query2 = "SELECT * FROM tbl_kain where kd_kain='"+ kodeKain + "' and stock='"+ stock + "'" ;
+                var sql = new MySqlCommand(query2, conn_user);
+                MySqlDataReader read = sql.ExecuteReader();
+                if (read.Read())
+                {
+                    conn_user.Close();
+                    conn_user.Open();
+                    string query3 = "delete from tbl_kain where kd_kain='" + kodeKain + "'";
+                    var sql2 = new MySqlCommand(query3, conn_user);
+                    sql2.ExecuteNonQuery();
+                }
+                else
+                {
+                    conn_user.Close();
+                    conn_user.Open();
+                    string query3 = "SELECT * FROM tbl_kain where kd_kain='" + kodeKain + "'";                    
+                    var sql2 = new MySqlCommand(query3, conn_user);
+                    MySqlDataReader read2 = sql2.ExecuteReader();
+                    if (read2.Read())
+                    {
+                        Int32 jumlah = Int32.Parse(read2.GetString("stock")) - Int32.Parse(stock);
+                        string query4 = "update tbl_kain set stock='" + jumlah + "' where kd_kain='" + kodeKain + "'";
+                        var sql3 = new MySqlCommand(query4, conn_user);
+                        conn_user.Close();
+                        conn_user.Open();
+                        sql3.ExecuteNonQuery();
+                    }
+                }
+
+            }
+
+            dataGridView2.Rows.Clear();
+            button4.Enabled = true;
+            button5.Enabled = false;
+            button1.Enabled = false;
+            dataGridView1.Enabled = true;
+            dataGridView2.Enabled = false;
+            conn_user.Close();            
+
+            
         }
     }
 }
