@@ -22,6 +22,8 @@ namespace InventoryTekstil.Dashboard
 
         private void Takeout_Load(object sender, EventArgs e)
         {
+            button5.Enabled = false;
+            dataGridView2.Enabled = false;
             conn_user.Open();
             var sql = new MySqlCommand("SELECT * FROM tbl_jenis_kain", conn_user);
             MySqlDataReader read = sql.ExecuteReader();
@@ -81,12 +83,13 @@ namespace InventoryTekstil.Dashboard
                         Int32 sisaStock = Int32.Parse(stock) - stockData;
                         stock = (stockData).ToString();
                         if (sisaStock != 0) { 
-                            dataGridView1.Rows[row].Cells[5].Value =sisaStock.ToString();
+                            dataGridView1.Rows[row].Cells[5].Value = sisaStock.ToString();
                         }
                         else
                         {
                             dataGridView1.Rows.RemoveAt(row);
                         }
+                        stockData = 0;
                         button4.Enabled = false;
                         dataGridView1.Enabled = false;
                     }
@@ -95,7 +98,9 @@ namespace InventoryTekstil.Dashboard
                         stockData = stockData - Int32.Parse(stock);
                         dataGridView1.Rows.RemoveAt(row);
                     }
-                    dataGridView2.Rows.Add(kodeKain, kodeJenis, lot, panjang, gramasi, stock);                
+                    dataGridView2.Rows.Add(kodeKain, kodeJenis, lot, panjang, gramasi, stock);
+                    button5.Enabled = true;
+                    dataGridView2.Enabled = true;
                 }
             }
         }
@@ -120,22 +125,39 @@ namespace InventoryTekstil.Dashboard
                     string gramasi = dataGridView2.Rows[row].Cells[4].Value.ToString();
                     string stock = dataGridView2.Rows[row].Cells[5].Value.ToString();
 
-                    for (int rows = 0; rows < dataGridView1.Rows.Count; rows++)
+                    Boolean isAvaialbe = false;
+                    Int32 avaiableAt = 0;
+                    for (int i = 0; i < dataGridView1.Rows.Count-1; i++)
                     {
-                        if (dataGridView1.Rows[rows].Cells[0].Value.ToString() == kodeKain)
+                        if (dataGridView1.Rows[i].Cells[0].Value.ToString() == kodeKain)
                         {
-                            Int32 stock1 = Int32.Parse(dataGridView1.Rows[row].Cells[5].Value.ToString());
-                            Int32 stock2 = Int32.Parse(stock);
-                            dataGridView1.Rows[row].Cells[5].Value = (stock1 + stock2).ToString();
-                            dataGridView2.Rows.RemoveAt(row);
-                            return;
-                        }
-                        else
-                        {
-                            return;
+                            isAvaialbe = true;
+                            avaiableAt = i;                          
                         }
                     }
-                    
+
+                    if (isAvaialbe)
+                    {                        
+                        Int32 stock1 = Int32.Parse(dataGridView1.Rows[avaiableAt].Cells[5].Value.ToString());
+                        Int32 stock2 = Int32.Parse(stock);
+                        dataGridView1.Rows[avaiableAt].Cells[5].Value = (stock1 + stock2).ToString();
+                        dataGridView2.Rows.RemoveAt(row);
+                        stockData = stockData + stock2;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows.Add(kodeKain, kodeJenis, lot, panjang, gramasi, stock);
+                        dataGridView2.Rows.RemoveAt(row);
+                        stockData = stockData + Int32.Parse(stock);
+                    }
+
+                    if (dataGridView2.Rows.Count == 1)
+                    {
+                        button5.Enabled = false;
+                        dataGridView2.Enabled = false;
+                    }
+                    button4.Enabled = true;
+                    dataGridView1.Enabled = true;                    
                 }
             }
         }
