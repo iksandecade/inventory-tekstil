@@ -41,16 +41,16 @@ namespace InventoryTekstil.Dashboard
         private void button3_Click(object sender, EventArgs e)
         {
             conn_user.Open();
-
+            stockData = 0;
             stockData = Int32.Parse(textBox1.Text.ToString());
-            string query = "SELECT * FROM tbl_kain where kd_jenis=(select kd_jenis from tbl_jenis_kain where nama='" + comboBox1.Text + "') order by stock asc";
+            string query = "SELECT * FROM tbl_kain where kd_jenis=(select kd_jenis from tbl_jenis_kain where nama='" + comboBox1.Text + "') order by stok asc";
             var sql = new MySqlCommand(query, conn_user);
             MySqlDataReader read = sql.ExecuteReader();
             dataGridView1.Rows.Clear();
             dataGridView1.Refresh();
             while (read.Read())
             {
-                dataGridView1.Rows.Add(read.GetString("kd_kain"), read.GetString("kd_jenis"), read.GetString("lot"), read.GetString("panjang"), read.GetString("gramasi"), read.GetString("stock"));
+                dataGridView1.Rows.Add(read.GetString("kd_kain"), read.GetString("kd_jenis"), read.GetString("lot"), read.GetString("panjang"), read.GetString("gramasi"), read.GetString("stok"));
             }
 
             read.Close();
@@ -184,7 +184,7 @@ namespace InventoryTekstil.Dashboard
                 string query = "insert into tbl_out (kd_item, jenis, tgl_keluar, jumlah) values ('" + kodeKain + "','" + comboBox1.Text + "','"+ today.ToString("yyyy-MM-dd hh:mm:ss") + "','" + stock + "')";
                 MySqlCommand cmd = new MySqlCommand(query, conn_user);                
                 cmd.ExecuteNonQuery();
-                string query2 = "SELECT * FROM tbl_kain where kd_kain='"+ kodeKain + "' and stock='"+ stock + "'" ;
+                string query2 = "SELECT * FROM tbl_kain where kd_kain='"+ kodeKain + "' and stok='"+ stock + "'" ;
                 var sql = new MySqlCommand(query2, conn_user);
                 MySqlDataReader read = sql.ExecuteReader();
                 if (read.Read())
@@ -204,8 +204,8 @@ namespace InventoryTekstil.Dashboard
                     MySqlDataReader read2 = sql2.ExecuteReader();
                     if (read2.Read())
                     {
-                        Int32 jumlah = Int32.Parse(read2.GetString("stock")) - Int32.Parse(stock);
-                        string query4 = "update tbl_kain set stock='" + jumlah + "' where kd_kain='" + kodeKain + "'";
+                        Int32 jumlah = Int32.Parse(read2.GetString("stok")) - Int32.Parse(stock);
+                        string query4 = "update tbl_kain set stok='" + jumlah + "' where kd_kain='" + kodeKain + "'";
                         var sql3 = new MySqlCommand(query4, conn_user);
                         conn_user.Close();
                         conn_user.Open();
@@ -224,6 +224,11 @@ namespace InventoryTekstil.Dashboard
             conn_user.Close();            
 
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

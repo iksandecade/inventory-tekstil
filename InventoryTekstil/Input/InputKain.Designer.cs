@@ -40,6 +40,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tbGramasi = new System.Windows.Forms.TextBox();
             this.tbStok = new System.Windows.Forms.TextBox();
+            this.kainGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.kainGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -63,7 +65,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 94);
+            this.label3.Location = new System.Drawing.Point(321, 35);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 2;
@@ -72,7 +74,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 125);
+            this.label4.Location = new System.Drawing.Point(321, 66);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
             this.label4.TabIndex = 3;
@@ -80,7 +82,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(297, 30);
+            this.btnAdd.Location = new System.Drawing.Point(24, 144);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 4;
@@ -90,7 +92,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(297, 60);
+            this.btnCancel.Location = new System.Drawing.Point(105, 144);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 5;
@@ -114,7 +116,7 @@
             // 
             // tbPanjang
             // 
-            this.tbPanjang.Location = new System.Drawing.Point(77, 91);
+            this.tbPanjang.Location = new System.Drawing.Point(377, 32);
             this.tbPanjang.Name = "tbPanjang";
             this.tbPanjang.Size = new System.Drawing.Size(171, 20);
             this.tbPanjang.TabIndex = 8;
@@ -122,7 +124,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 156);
+            this.label5.Location = new System.Drawing.Point(337, 97);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 9;
@@ -130,23 +132,32 @@
             // 
             // tbGramasi
             // 
-            this.tbGramasi.Location = new System.Drawing.Point(77, 122);
+            this.tbGramasi.Location = new System.Drawing.Point(377, 63);
             this.tbGramasi.Name = "tbGramasi";
             this.tbGramasi.Size = new System.Drawing.Size(171, 20);
             this.tbGramasi.TabIndex = 10;
             // 
             // tbStok
             // 
-            this.tbStok.Location = new System.Drawing.Point(77, 153);
+            this.tbStok.Location = new System.Drawing.Point(377, 94);
             this.tbStok.Name = "tbStok";
             this.tbStok.Size = new System.Drawing.Size(171, 20);
             this.tbStok.TabIndex = 11;
+            // 
+            // kainGridView
+            // 
+            this.kainGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.kainGridView.Location = new System.Drawing.Point(24, 188);
+            this.kainGridView.Name = "kainGridView";
+            this.kainGridView.Size = new System.Drawing.Size(664, 150);
+            this.kainGridView.TabIndex = 12;
             // 
             // InputKain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 204);
+            this.ClientSize = new System.Drawing.Size(700, 339);
+            this.Controls.Add(this.kainGridView);
             this.Controls.Add(this.tbStok);
             this.Controls.Add(this.tbGramasi);
             this.Controls.Add(this.label5);
@@ -162,6 +173,7 @@
             this.Name = "InputKain";
             this.Text = "InputKain";
             this.Load += new System.EventHandler(this.InputKain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.kainGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,5 +193,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbGramasi;
         private System.Windows.Forms.TextBox tbStok;
+        private System.Windows.Forms.DataGridView kainGridView;
     }
 }

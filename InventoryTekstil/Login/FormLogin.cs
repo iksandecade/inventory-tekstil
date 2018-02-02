@@ -36,6 +36,9 @@ namespace InventoryTekstil
                 string lastName = reader.GetString(3);
                 string role = reader.GetString(5);
 
+                Utils.Session.role = role;
+                Utils.Session.username = usernameTb.Text.ToString();
+
                 reader.Close();
 
                 mainForm.Show();

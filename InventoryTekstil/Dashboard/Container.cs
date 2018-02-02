@@ -34,26 +34,97 @@ namespace InventoryTekstil
             f.Show();
         }
 
-        private void benangMenu_Click(object sender, EventArgs e)
-        {
-            showReport("benang");
-        }
-
-        private void semicalMenu_Click(object sender, EventArgs e)
-        {
-            showReport("semical");
-        }
-
         private void FormDashboard_Load(object sender, EventArgs e)
         {
+            Dashboard.DashboardDetail reg = new Dashboard.DashboardDetail();
+            reg.MdiParent = this;
+            reg.Show();
 
+
+            rawMaterialMenu.Visible = true;
+            finishedGoodsMenu.Visible = true;
+            reportMenu.Visible = true;
+            settingMenu.Visible = true;
+            userMenu.Visible = true;
+
+            switch (Utils.Session.role)
+            {
+                case ("staff"):
+                    userMenu.Visible = false;
+                    reportMenu.Visible = false;
+                    break;
+                case ("manager"):
+                    finishedGoodsMenu.Visible = false;
+                    rawMaterialMenu.Visible = false;
+                    settingMenu.Visible = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        // BENANG
+
+        private void benangAdd_Click(object sender, EventArgs e)
+        {
+            Input.InputBenang benang = new Input.InputBenang();
+            benang.MdiParent = this;
+            benang.Show();
         }
 
-        private void jenisKainMenu_Click(object sender, EventArgs e)
+
+        // SEMICAL
+        private void semicalAdd_Click(object sender, EventArgs e)
+        {
+            Input.InputSemical semical = new Input.InputSemical();
+            semical.MdiParent = this;
+            semical.Show();
+        }
+
+        // KAIN
+        private void kainAdd_Click(object sender, EventArgs e)
+        {
+            Input.InputKain kain = new Input.InputKain();
+            kain.MdiParent = this;
+            kain.Show();
+        }
+
+        private void kainTakeOut_Click(object sender, EventArgs e)
         {
             Dashboard.Takeout takeout = new Dashboard.Takeout();
-            takeout.MdiParent= this;
+            takeout.MdiParent = this;
             takeout.Show();
+        }
+
+        private void showReportIn(string jenis)
+        {
+            Report.ReportIn report = new Report.ReportIn();
+            report.MdiParent = this;
+            report.jenis = jenis;
+            report.Show();
+        }
+
+        private void kainReportIn_Click(object sender, EventArgs e)
+        {
+            showReportIn("kain");
+        }
+
+        private void benangReportIn_Click(object sender, EventArgs e)
+        {
+            showReportIn("benang");
+        }
+
+        private void semicalReportIn_Click(object sender, EventArgs e)
+        {
+            showReportIn("semical");
+        }
+
+        private void logoutMenu_Click(object sender, EventArgs e)
+        {
+            Form1 login = new Form1();
+            login.Show();
+            this.Close();
+
         }
     }
 }

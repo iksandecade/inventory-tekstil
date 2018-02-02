@@ -27,11 +27,39 @@ namespace InventoryTekstil.Input
 
         private void InputSemical_Load(object sender, EventArgs e)
         {
-            loadJenisSemical();
+            loadDataset();
         }
 
+        public void loadDataset()
+        {
+            try
+            {
+                conn.Open();
+                string query = "Select * from tbl_semical";
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                {
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+                    SemicalGridView.DataSource = ds.Tables[0];
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed with error : " + ex.Message);
+            }
+        }
 
+        private void clearData()
+        {
+            jenisComboBox.Text = "";
+            tbSupplier.Text = "";
+            tbHargaBeli.Text = "";
+            tbLot.Text = "";
+            tbStok.Text = "";
 
+            loadDataset();
+        }
 
         private void loadJenisSemical()
         {
@@ -58,15 +86,9 @@ namespace InventoryTekstil.Input
         private void btnAdd_Click(object sender, EventArgs e)
         {
             
-                string kodeJenis = "";
-                if (jenisComboBox.SelectedItem != null)
-                {
-                    DataRowView drv = jenisComboBox.SelectedItem as DataRowView;
-                    kodeJenis = drv.Row["kd_jenis"].ToString();
-                }
+                string kodeJenis = jenisComboBox.SelectedItem.ToString();
                 string lot = tbLot.Text.ToString();
                 string kodeSemical = checkFromSemical(kodeJenis, lot);
-                string kuantitas = tbQty.Text.ToString();
                 string stok = tbStok.Text.ToString();
                 string supplier = tbSupplier.Text.ToString();
                 string hargaBeli = tbHargaBeli.Text.ToString();
@@ -77,21 +99,21 @@ namespace InventoryTekstil.Input
                 }
                 else
                 {
-                kodeSemical = insertSemical(kodeJenis, lot, kuantitas, supplier, hargaBeli, stok);
+                kodeSemical = insertSemical(kodeJenis, lot, supplier, hargaBeli, stok);
                 }
 
                 Utils.DatabaseHelper db = new Utils.DatabaseHelper();
                 db.insertTblIn(kodeSemical, "semical", stok);
 
+                clearData();
                 MessageBox.Show("Data semical berhasil disimpan");
             }
 
-            private string insertSemical(string kodeJenis, string lot, string kuantitas, string supplier, string hargaBeli, string stok)
+            private string insertSemical(string kodeJenis, string lot, string supplier, string hargaBeli, string stok)
             {
                 conn.Open();
-                string query = "INSERT INTO tbl_semical (kd_jenis, kuantitas, supplier, harga_beli, no_lot, stok )" +
-                    " VALUES('" + kodeJenis + "', '" + kuantitas + "'" +
-                    ", '" + supplier + "','" + hargaBeli + "','" + lot + "', '"+ stok +"')";
+                string query = "INSERT INTO tbl_semical (kd_jenis, supplier, harga_beli, no_lot, stok )" +
+                    " VALUES('" + kodeJenis + "', '" + supplier + "','" + hargaBeli + "','" + lot + "', '"+ stok +"')";
 
                 // create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, conn);

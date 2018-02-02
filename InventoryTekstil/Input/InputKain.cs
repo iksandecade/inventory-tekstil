@@ -25,8 +25,37 @@ namespace InventoryTekstil.Input
         private void InputKain_Load(object sender, EventArgs e)
         {
             loadJenisKain();
+            loadDataset();
         }
 
+        private void clearData() {
+            jenisKainComboBox.Text = "";
+            tbLot.Text = "";
+            tbPanjang.Text = "";
+            tbGramasi.Text = "";
+            tbStok.Text = "";
+
+            loadDataset();
+        }
+        public void loadDataset()
+        {
+            try
+            {
+                conn.Open();
+                string query = "Select * from tbl_kain";
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                {
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+                    kainGridView.DataSource = ds.Tables[0];
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed with error : " + ex.Message);
+            }
+        }
         private void loadJenisKain()
         {
             conn.Open();
@@ -75,6 +104,7 @@ namespace InventoryTekstil.Input
             Utils.DatabaseHelper db = new Utils.DatabaseHelper();
             db.insertTblIn(kodeKain, "kain", stok);
 
+            clearData();
             MessageBox.Show("Data kain berhasil disimpan");
         }
         

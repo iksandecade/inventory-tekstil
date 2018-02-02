@@ -16,7 +16,14 @@ namespace InventoryTekstil
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Input.InputSemical());
+            if (Utils.Session.username == null) {
+                Application.Run(new Form1());
+            }
+            else
+            {
+                Application.Run(new FormDashboard());
+            }
+            
         }
     }
 }

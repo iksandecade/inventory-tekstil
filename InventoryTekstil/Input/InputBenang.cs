@@ -20,42 +20,71 @@ namespace InventoryTekstil.Input
             InitializeComponent();
         }
 
+        private void clearData() {
+            jenisComboBox.Text = "";
+            tbSupplier.Text = "";
+            tbHargaBeli.Text = "";
+            tbLot.Text = "";
+            tbStok.Text = "";
+
+            loadDataset();
+        }
+
         private void InputBenang_Load(object sender, EventArgs e)
         {
-            //loadJenisSemical();
+            loadDataset();
+        }
+
+        public void loadDataset()
+        {
+            try
+            {
+                conn.Open();
+                string query = "Select * from tbl_benang";
+                using (MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn))
+                {
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+                    benangGridView.DataSource = ds.Tables[0];
+                }
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed with error : " + ex.Message);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string jenis = tbJenis.Text.ToString();
+            string jenis = jenisComboBox.SelectedItem.ToString();
             string lot = tbLot.Text.ToString();
-            string kodeSemical = checkFromSemical(jenis, lot);
-            string kuantitas = tbQty.Text.ToString();
+            string kodeSemical = checkFromBenang(jenis, lot);
             string stok = tbStok.Text.ToString();
             string supplier = tbSupplier.Text.ToString();
             string hargaBeli = tbHargaBeli.Text.ToString();
 
             if (kodeSemical != null)
             {
-                kodeSemical = updateSemical(kodeSemical, stok);
+                kodeSemical = updateBenang(kodeSemical, stok);
             }
             else
             {
-                kodeSemical = insertSemical(kodeJenis, lot, kuantitas, supplier, hargaBeli, stok);
+                kodeSemical = insertBenang(jenis, lot, supplier, hargaBeli, stok);
             }
 
             Utils.DatabaseHelper db = new Utils.DatabaseHelper();
             db.insertTblIn(kodeSemical, "semical", stok);
 
-            MessageBox.Show("Data semical berhasil disimpan");
+            MessageBox.Show("Data benang berhasil disimpan");
+            clearData();
         }
 
-        private string insertSemical(string kodeJenis, string lot, string kuantitas, string supplier, string hargaBeli, string stok)
+        private string insertBenang(string jenis, string lot, string supplier, string hargaBeli, string stok)
         {
             conn.Open();
-            string query = "INSERT INTO tbl_semical (kd_jenis, kuantitas, supplier, harga_beli, no_lot, stok )" +
-                " VALUES('" + kodeJenis + "', '" + kuantitas + "'" +
-                ", '" + supplier + "','" + hargaBeli + "','" + lot + "', '" + stok + "')";
+            string query = "INSERT INTO tbl_benang (jenis, supplier, harga_beli, no_lot, stok )" +
+                " VALUES('" + jenis + "', '" + supplier + "','" + hargaBeli + "','" + lot + "', '" + stok + "')";
 
             // create command and assign the query and connection from the constructor
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -65,12 +94,12 @@ namespace InventoryTekstil.Input
             conn.Close();
             return getLastKode();
         }
-        private string updateSemical(string kodeSemical, string stok)
+        private string updateBenang(string kodeBenang, string stok)
         {
 
             // insert
             conn.Open();
-            string query = "UPDATE tbl_semical SET stok = stok + '" + stok + "' WHERE no_barang = '" + kodeSemical + "'";
+            string query = "UPDATE tbl_benang SET stok = stok + '" + stok + "' WHERE no_barang = '" + kodeBenang + "'";
 
             // create command and assign the query and connection from the constructor
             MySqlCommand cmd = new MySqlCommand(query, conn);
@@ -79,28 +108,28 @@ namespace InventoryTekstil.Input
             cmd.ExecuteNonQuery();
             conn.Close();
 
-            return kodeSemical;
+            return kodeBenang;
         }
         private string getLastKode()
         {
             Utils.DatabaseHelper db = new Utils.DatabaseHelper();
-            return db.getLastId("tbl_semical", "no_barang");
+            return db.getLastId("tbl_benang", "no_barang");
         }
-        private string checkFromSemical(string kodeJenis, string lot)
+        private string checkFromBenang(string jenis, string lot)
         {
 
-            string kodeSemical = null;
+            string kodeBenang = null;
             try
             {
                 conn.Open();
-                string query = "SELECT * FROM tbl_semical where kd_jenis ='" + kodeJenis + "' AND no_lot ='" + lot + "'";
+                string query = "SELECT * FROM tbl_benang where jenis ='" + jenis + "' AND no_lot ='" + lot + "'";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
                 {
-                    kodeSemical = reader["no_barang"].ToString();
+                    kodeBenang = reader["no_barang"].ToString();
 
                 }
             }
@@ -111,12 +140,11 @@ namespace InventoryTekstil.Input
 
 
             conn.Close();
-            return kodeSemical;
+            return kodeBenang;
 
 
         }
     }
 
 
-}
 }
