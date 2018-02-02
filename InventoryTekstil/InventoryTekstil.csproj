@@ -59,6 +59,24 @@
     <Compile Include="Dashboard\DashboardDetail.Designer.cs">
       <DependentUpon>DashboardDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Input\InputBenang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Input\InputBenang.Designer.cs">
+      <DependentUpon>InputBenang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Input\InputKain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Input\InputKain.Designer.cs">
+      <DependentUpon>InputKain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Input\InputSemical.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Input\InputSemical.Designer.cs">
+      <DependentUpon>InputSemical.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,11 +91,21 @@
     <Compile Include="ReportForm.Designer.cs">
       <DependentUpon>ReportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\DatabaseHelper.cs" />
     <EmbeddedResource Include="Dashboard\Container.resx">
       <DependentUpon>Container.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard\DashboardDetail.resx">
       <DependentUpon>DashboardDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Input\InputBenang.resx">
+      <DependentUpon>InputBenang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Input\InputKain.resx">
+      <DependentUpon>InputKain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Input\InputSemical.resx">
+      <DependentUpon>InputSemical.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
