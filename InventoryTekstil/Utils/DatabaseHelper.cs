@@ -17,7 +17,7 @@ namespace InventoryTekstil.Utils
             try
             {
                 conn.Open();
-                string query = "SELECT * FROM "+ table +" ORDER_BY "+ idColumnName +" DESC";
+                string query = "SELECT * FROM "+ table +" ORDER BY "+ idColumnName +" DESC";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader reader = cmd.ExecuteReader();

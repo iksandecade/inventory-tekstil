@@ -100,7 +100,7 @@ namespace InventoryTekstil.Input
             {
                 kodeKain = insertKain(kodeJenis, lot, panjang, gramasi, stok);
             }
-
+            MessageBox.Show(kodeKain + "");
             Utils.DatabaseHelper db = new Utils.DatabaseHelper();
             db.insertTblIn(kodeKain, "kain", stok);
 
@@ -145,6 +145,7 @@ namespace InventoryTekstil.Input
         {
             Utils.DatabaseHelper db = new Utils.DatabaseHelper();
             return db.getLastId("tbl_kain", "kd_kain");
+           
         }
         private string checkFromKain(string kodeJenis, string lot) { 
        

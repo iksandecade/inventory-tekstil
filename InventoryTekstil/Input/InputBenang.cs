@@ -74,7 +74,7 @@ namespace InventoryTekstil.Input
             }
 
             Utils.DatabaseHelper db = new Utils.DatabaseHelper();
-            db.insertTblIn(kodeSemical, "semical", stok);
+            db.insertTblIn(kodeSemical, "benang", stok);
 
             MessageBox.Show("Data benang berhasil disimpan");
             clearData();

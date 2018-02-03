@@ -42,19 +42,18 @@
             this.kainAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.kainTakeOut = new System.Windows.Forms.ToolStripMenuItem();
             this.reportMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.userMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.jenisKainMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.kainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kainReportIn = new System.Windows.Forms.ToolStripMenuItem();
             this.kainReportOut = new System.Windows.Forms.ToolStripMenuItem();
             this.benangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.semicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.benangReportIn = new System.Windows.Forms.ToolStripMenuItem();
             this.benangReportOut = new System.Windows.Forms.ToolStripMenuItem();
+            this.semicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.semicalReportIn = new System.Windows.Forms.ToolStripMenuItem();
             this.semicalReportOut = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.userMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,7 +94,7 @@
             this.benangAdd,
             this.benangTakeOut});
             this.benangMenu.Name = "benangMenu";
-            this.benangMenu.Size = new System.Drawing.Size(152, 22);
+            this.benangMenu.Size = new System.Drawing.Size(115, 22);
             this.benangMenu.Text = "Benang";
             // 
             // benangAdd
@@ -117,7 +116,7 @@
             this.semicalAdd,
             this.semicalTakeOut});
             this.semicalMenu.Name = "semicalMenu";
-            this.semicalMenu.Size = new System.Drawing.Size(152, 22);
+            this.semicalMenu.Size = new System.Drawing.Size(115, 22);
             this.semicalMenu.Text = "Semical";
             // 
             // semicalAdd
@@ -147,7 +146,7 @@
             this.kainAdd,
             this.kainTakeOut});
             this.kainMenu.Name = "kainMenu";
-            this.kainMenu.Size = new System.Drawing.Size(152, 22);
+            this.kainMenu.Size = new System.Drawing.Size(97, 22);
             this.kainMenu.Text = "Kain";
             // 
             // kainAdd
@@ -174,11 +173,76 @@
             this.reportMenu.Size = new System.Drawing.Size(54, 20);
             this.reportMenu.Text = "Report";
             // 
+            // kainToolStripMenuItem
+            // 
+            this.kainToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kainReportIn,
+            this.kainReportOut});
+            this.kainToolStripMenuItem.Name = "kainToolStripMenuItem";
+            this.kainToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.kainToolStripMenuItem.Text = "Kain";
+            // 
+            // kainReportIn
+            // 
+            this.kainReportIn.Name = "kainReportIn";
+            this.kainReportIn.Size = new System.Drawing.Size(121, 22);
+            this.kainReportIn.Text = "Data In";
+            this.kainReportIn.Click += new System.EventHandler(this.kainReportIn_Click);
+            // 
+            // kainReportOut
+            // 
+            this.kainReportOut.Name = "kainReportOut";
+            this.kainReportOut.Size = new System.Drawing.Size(121, 22);
+            this.kainReportOut.Text = "Data Out";
+            // 
+            // benangToolStripMenuItem
+            // 
+            this.benangToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.benangReportIn,
+            this.benangReportOut});
+            this.benangToolStripMenuItem.Name = "benangToolStripMenuItem";
+            this.benangToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.benangToolStripMenuItem.Text = "Benang";
+            // 
+            // benangReportIn
+            // 
+            this.benangReportIn.Name = "benangReportIn";
+            this.benangReportIn.Size = new System.Drawing.Size(121, 22);
+            this.benangReportIn.Text = "Data In";
+            this.benangReportIn.Click += new System.EventHandler(this.benangReportIn_Click);
+            // 
+            // benangReportOut
+            // 
+            this.benangReportOut.Name = "benangReportOut";
+            this.benangReportOut.Size = new System.Drawing.Size(121, 22);
+            this.benangReportOut.Text = "Data Out";
+            // 
+            // semicalToolStripMenuItem
+            // 
+            this.semicalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.semicalReportIn,
+            this.semicalReportOut});
+            this.semicalToolStripMenuItem.Name = "semicalToolStripMenuItem";
+            this.semicalToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+            this.semicalToolStripMenuItem.Text = "Semical";
+            // 
+            // semicalReportIn
+            // 
+            this.semicalReportIn.Name = "semicalReportIn";
+            this.semicalReportIn.Size = new System.Drawing.Size(121, 22);
+            this.semicalReportIn.Text = "Data In";
+            this.semicalReportIn.Click += new System.EventHandler(this.semicalReportIn_Click);
+            // 
+            // semicalReportOut
+            // 
+            this.semicalReportOut.Name = "semicalReportOut";
+            this.semicalReportOut.Size = new System.Drawing.Size(121, 22);
+            this.semicalReportOut.Text = "Data Out";
+            // 
             // settingMenu
             // 
             this.settingMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.userMenu,
-            this.jenisKainMenu});
+            this.userMenu});
             this.settingMenu.Name = "settingMenu";
             this.settingMenu.Size = new System.Drawing.Size(56, 20);
             this.settingMenu.Text = "Setting";
@@ -188,12 +252,7 @@
             this.userMenu.Name = "userMenu";
             this.userMenu.Size = new System.Drawing.Size(152, 22);
             this.userMenu.Text = "User";
-            // 
-            // jenisKainMenu
-            // 
-            this.jenisKainMenu.Name = "jenisKainMenu";
-            this.jenisKainMenu.Size = new System.Drawing.Size(152, 22);
-            this.jenisKainMenu.Text = "Jenis Kain";
+            this.userMenu.Click += new System.EventHandler(this.userMenu_Click);
             // 
             // logoutMenu
             // 
@@ -201,72 +260,6 @@
             this.logoutMenu.Size = new System.Drawing.Size(57, 20);
             this.logoutMenu.Text = "Logout";
             this.logoutMenu.Click += new System.EventHandler(this.logoutMenu_Click);
-            // 
-            // kainToolStripMenuItem
-            // 
-            this.kainToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.kainReportIn,
-            this.kainReportOut});
-            this.kainToolStripMenuItem.Name = "kainToolStripMenuItem";
-            this.kainToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.kainToolStripMenuItem.Text = "Kain";
-            // 
-            // kainReportIn
-            // 
-            this.kainReportIn.Name = "kainReportIn";
-            this.kainReportIn.Size = new System.Drawing.Size(152, 22);
-            this.kainReportIn.Text = "Data In";
-            this.kainReportIn.Click += new System.EventHandler(this.kainReportIn_Click);
-            // 
-            // kainReportOut
-            // 
-            this.kainReportOut.Name = "kainReportOut";
-            this.kainReportOut.Size = new System.Drawing.Size(152, 22);
-            this.kainReportOut.Text = "Data Out";
-            // 
-            // benangToolStripMenuItem
-            // 
-            this.benangToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.benangReportIn,
-            this.benangReportOut});
-            this.benangToolStripMenuItem.Name = "benangToolStripMenuItem";
-            this.benangToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.benangToolStripMenuItem.Text = "Benang";
-            // 
-            // semicalToolStripMenuItem
-            // 
-            this.semicalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.semicalReportIn,
-            this.semicalReportOut});
-            this.semicalToolStripMenuItem.Name = "semicalToolStripMenuItem";
-            this.semicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.semicalToolStripMenuItem.Text = "Semical";
-            // 
-            // benangReportIn
-            // 
-            this.benangReportIn.Name = "benangReportIn";
-            this.benangReportIn.Size = new System.Drawing.Size(152, 22);
-            this.benangReportIn.Text = "Data In";
-            this.benangReportIn.Click += new System.EventHandler(this.benangReportIn_Click);
-            // 
-            // benangReportOut
-            // 
-            this.benangReportOut.Name = "benangReportOut";
-            this.benangReportOut.Size = new System.Drawing.Size(152, 22);
-            this.benangReportOut.Text = "Data Out";
-            // 
-            // semicalReportIn
-            // 
-            this.semicalReportIn.Name = "semicalReportIn";
-            this.semicalReportIn.Size = new System.Drawing.Size(152, 22);
-            this.semicalReportIn.Text = "Data In";
-            this.semicalReportIn.Click += new System.EventHandler(this.semicalReportIn_Click);
-            // 
-            // semicalReportOut
-            // 
-            this.semicalReportOut.Name = "semicalReportOut";
-            this.semicalReportOut.Size = new System.Drawing.Size(152, 22);
-            this.semicalReportOut.Text = "Data Out";
             // 
             // FormDashboard
             // 
@@ -296,7 +289,6 @@
         private System.Windows.Forms.ToolStripMenuItem dashboardMenu;
         private System.Windows.Forms.ToolStripMenuItem settingMenu;
         private System.Windows.Forms.ToolStripMenuItem userMenu;
-        private System.Windows.Forms.ToolStripMenuItem jenisKainMenu;
         private System.Windows.Forms.ToolStripMenuItem logoutMenu;
         private System.Windows.Forms.ToolStripMenuItem benangAdd;
         private System.Windows.Forms.ToolStripMenuItem benangTakeOut;

@@ -18,6 +18,8 @@ namespace InventoryTekstil
             InitializeComponent();
         }
 
+       
+
 
         private void dashboardMenu_Click(object sender, EventArgs e)
         {
@@ -125,6 +127,13 @@ namespace InventoryTekstil
             login.Show();
             this.Close();
 
+        }
+
+        private void userMenu_Click(object sender, EventArgs e)
+        {
+            Login.Registrasi reg = new Login.Registrasi();
+            reg.MdiParent = this;
+            reg.Show();
         }
     }
 }
